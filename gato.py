@@ -1,22 +1,22 @@
 class Animal:
-    def __init__(self, nome, raca, data_nascimento, cor, peso, porte, sexo):
+    def __init__(self, nome, especie, data_nascimento, cor, peso, sexo):
         self.nome = nome,
-        self.raca = raca,
+        self.especie = especie,
         self.data_nascimento = data_nascimento,
         self.cor = cor,
         self.peso = peso,
-        self.porte = porte,
         self.sexo = sexo,
 
     def apresentar(self):
-        print(f'O animal se chama {self.nome}', f'é da raça: {self.raca}',
+        print(f'O animal se chama {self.nome}', f'é da espécie: {self.especie}',
             f'nasceu em {self.data_nascimento}', f'e da cor: {self.cor}',
             f'está com o peso:{self.peso} em kgs',
-            f'é do porte: {self.porte}', f'e do sexo {self.sexo}')
+            f'e do sexo {self.sexo}')
 
 class Gato(Animal):
-    def __init__(self, nome, raca, data_nascimeto , cor, peso, sexo):
-        super().__init__(nome, raca, data_nascimeto, cor, peso, sexo)
+    def __init__(self, nome, especie, data_nascimeto , cor, peso, sexo, raca):
+        super().__init__(nome, especie, data_nascimeto, cor, peso, sexo)
+        self.raca = raca
         self.saude = True
         self.fome = True
         self.miando = True
@@ -42,15 +42,18 @@ class Gato(Animal):
 
     def dormir(self):
         if not self.fome:
-            print(f'O gata está dormindo!')
+            self.dormindo = True
+            print(f'O gato está dormindo!')
+        elif self.dormindo:
+            print(f'O gato ja á está dormindo!')
         else:
             print(f'O gato não está dormindo, pois está com fome!')
 
     def acordar(self):
         if self.dormindo:
-            self.fome = True
             print(f'O gato acordou pois está com fome!')
             self.dormindo = False
+            self.fome = True
         else:
             print(f'O gato já está acordado!')
 
@@ -59,6 +62,12 @@ class Gato(Animal):
             print(f'O gato está brincando com seu novelo de lã!')
         else:
             print(f'O gato não está brincando, porque pode estar com fome, dormindo ou doente!')
+    def comer(self):
+        if self.fome:
+            print(f'O gato está comendo')
+            self.fome = False
+        else:
+            print(f'O gato não está com fome!')
 
-gato01 = Gato('Mingau','siamês', '27/06/2022', 'preto', '5.00', 'macho')
-gato02 = Gato('Mel','persa', '27/09/2023', 'laranja', '6.00', 'fêmea')
+gato01 = Gato('Mingau','gato', '27/06/2022', 'preto', '5.00', 'macho','siamês')
+gato02 = Gato('Mel','gato', '27/09/2023', 'laranja', '6.00', 'fêmea','persa')

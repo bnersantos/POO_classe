@@ -1,74 +1,79 @@
 class Pessoa:
     def __init__(self, nome, data_nascimento, codigo,trabalhando = False, estudando = True, salario = 0,):
-        self.nome = nome
-        self.data_nascimento = data_nascimento
-        self.codigo = codigo
-        self.salario = salario
-        self.trabalhando = trabalhando
-        self.estudando = estudando
+        self.__nome = nome
+        self.__data_nascimento = data_nascimento
+        self.__codigo = codigo
+        self._salario = salario
+        self._trabalhando = trabalhando
+        self._estudando = estudando
 
-
-
+    def get_nome(self):
+        return self.__nome
+    def get_data_nascimento(self):
+        return self.__data_nascimento
+    def get_codigo(self):
+        return self.__codigo
+    def get_salario(self):
+        return self._salario
+    def get_trabalhando(self):
+        return self._trabalhando
+    def get_estudando(self):
+        return self._estudando
+    def set_salario(self, valor):
+        if valor >= 0:
+            self._salario = valor
+        else:
+            print(f'Salário inválido!')
     def apresentar(self):
         print (f'<Pessoa: \n'
-                f'Meu nome é: {self.nome}; \n'
-                f'Nasci em: {self.data_nascimento};\n'
-                f'Meu código é: {self.codigo}.>;')
+                f'Meu nome é: ', self.get_nome(), '; \n'
+                f'Nasci em: {self.get_data_nascimento()};\n'
+                f'Meu código é: {self.get_codigo()};\n.>;')
 
-        # if self.estudando:
-        #     print(f'Estou Estudando;')
-        # else:
-        #     print(f'Não estou estudando;')
-        #
-        # if self.trabalhando:
-        #     print(f'Estou trabalhando>.')
-        # else:
-        #     print(f'Não está trabalhando>.')
+    def set_(self, valor):
+        if valor >= 0:
+            self._salario = valor
+        else:
+            print(f'Salário inválido!')
 
-
-    def estudar(self):
-        if self.estudando and self.trabalhando:
+    def set_estudar(self, status):
+        if self.get_estudando() and self.get_trabalhando() and status:
             print(f'Trabalhando e estudando, então recebeu um aumento.')
-            self.salario += 200
-            print(f'O salário atual é: {self.salario} ')
-        elif self.estudando:
-            print(f'Está apenas estudando')
+            self.set_salario(1518 + 200)
+            print(f'O salário atual é: {self.get_salario()} ')
+        elif self.get_estudando and status:
+            print(f'Já está estudando')
+        elif self.get_trabalhando and not status:
+            print(f'Agora está estudando')
         else:
             print(f'Não está estudando!\n')
 
-    def trabalhar(self):
-        if self.trabalhando:
-            print(f'Trabalhando!')
-            self.salario += 1518
-            print(f'salario: {self.salario}')
-        else:
+    def set_trabalhar(self, status):
+        if self.get_trabalhando and status:
+            print(f'Já está trabalhando!')
+            print(f'salario: {self.get_salario()}')
+        elif not self.get_trabalhando and not status:
             print(f'Não está trabalhando!')
+        elif not self.get_trabalhando and status:
+            self.__trabalhando = status
+            self.set_salario(1518)
+        else:
+            self.set_trabalhar = status
+            self.set_salario(0)
 
 
 p1 = Pessoa('<Abner>', '01/02/2008', '13', estudando = True, trabalhando = False)
-p1.apresentar()
-p1.estudar()
-p1.trabalhar()
 
 p2 = Pessoa('<Bruno>', '27/06/2008', '2', estudando = False, trabalhando = True)
-p2.apresentar()
-p2.estudar()
-p2.trabalhar()
+
 
 p3 = Pessoa('<Vitor>', '27/09/2007', '29', estudando = False, trabalhando = True)
-p3.apresentar()
-p3.trabalhar()
-p3.estudar()
 
 p4 = Pessoa('<Vinícius>', '26/03/2008', '29', estudando = True, trabalhando = True)
-p4.apresentar()
-p4.trabalhar()
-p4.estudar()
 
 p5 = Pessoa('<Gabriele>', '27/10/2007','8', estudando = True, trabalhando = False)
-p5.apresentar()
-p5.trabalhar()
-p5.estudar()
+
+
 
 class Bebe(Pessoa):
     def __init__(self, nome, data_nascimento, codigo):
