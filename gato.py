@@ -1,5 +1,7 @@
 class Animal:
     def __init__(self, nome, especie, data_nascimento, cor, peso, sexo):
+        # __ = privado
+        # _ = protegido
         self.__nome = nome,
         self.__especie = especie,
         self.__data_nascimento = data_nascimento,
@@ -31,9 +33,9 @@ class Animal:
 
 
 class Gato(Animal):
-    def __init__(self, __nome, _especie, _data_nascimeto , _cor, peso, sexo, raca):
-        super().__init__(__nome, _especie, _data_nascimeto, _cor, peso, sexo)
-        self.raca = raca
+    def __init__(self, nome, especie, data_nascimeto , cor, peso, sexo, raca):
+        super().__init__(nome, especie, data_nascimeto, cor, peso, sexo)
+        self.__raca = raca
         self.saude = True
         self.fome = True
         self.miando = True
@@ -41,11 +43,11 @@ class Gato(Animal):
 
     def apresentar(self):
         print(f'Este é meu gato(a),\n'
-            f'nome dele é: {self.__nome};\n',
-            f'nasceu em {self.__data_nascimento};\n',
-            f'é da raça: {self.raca}; \n',
-            f'e está pesando: {self._peso};\n'
-            f'e é do sexo: {self._sexo}.')
+            f'nome dele é: {self.get_nome()};\n',
+            f'nasceu em {self.get_data_nascimento()};\n',
+            f'é da raça: {self.__raca}; \n',
+            f'e está pesando: {self.get_peso()};\n'
+            f'e é do sexo: {self.get_sexo()}.')
     def set_bem_estar(self):
         if self.saude:
             print(f'O gato está bem e saudável')
