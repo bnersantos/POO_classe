@@ -1,21 +1,38 @@
 class Animal:
     def __init__(self, nome, especie, data_nascimento, cor, peso, sexo):
-        self.nome = nome,
-        self.especie = especie,
-        self.data_nascimento = data_nascimento,
-        self.cor = cor,
-        self.peso = peso,
-        self.sexo = sexo,
+        self.__nome = nome,
+        self.__especie = especie,
+        self.__data_nascimento = data_nascimento,
+        self._cor = cor,
+        self._peso = peso,
+        self._sexo = sexo,
+
+    def get_nome(self):
+        return self.__nome
+    def get_especie(self):
+        return self.__especie
+    def get_data_nascimento(self):
+        return self.__data_nascimento
+    def get_cor(self):
+        return self._cor
+    def get_peso(self, peso):
+        if peso > 0:
+            self._peso = peso
+        else:
+            print(f'O peso deve ser maior que 0')
+    def get_sexo(self):
+        return self._sexo
 
     def apresentar(self):
-        print(f'O animal se chama {self.nome}', f'é da espécie: {self.especie}',
-            f'nasceu em {self.data_nascimento}', f'e da cor: {self.cor}',
-            f'está com o peso:{self.peso} em kgs',
-            f'e do sexo {self.sexo}')
+        print(f'O animal se chama {self.__nome}', f'é da espécie: {self.__especie}',
+            f'nasceu em {self.__data_nascimento}', f'e da cor: {self._cor}',
+            f'está com o peso:{self._peso} em kgs',
+            f'e do sexo {self._sexo}')
+
 
 class Gato(Animal):
-    def __init__(self, nome, especie, data_nascimeto , cor, peso, sexo, raca):
-        super().__init__(nome, especie, data_nascimeto, cor, peso, sexo)
+    def __init__(self, __nome, _especie, _data_nascimeto , _cor, peso, sexo, raca):
+        super().__init__(__nome, _especie, _data_nascimeto, _cor, peso, sexo)
         self.raca = raca
         self.saude = True
         self.fome = True
@@ -24,23 +41,23 @@ class Gato(Animal):
 
     def apresentar(self):
         print(f'Este é meu gato(a),\n'
-            f'nome dele é: {self.nome};\n',
-            f'nasceu em {self.data_nascimento};\n',
+            f'nome dele é: {self.__nome};\n',
+            f'nasceu em {self.__data_nascimento};\n',
             f'é da raça: {self.raca}; \n',
-            f'e está pesando: {self.peso};\n'
-            f'e é do sexo: {self.sexo}.')
-    def bem_estar(self):
+            f'e está pesando: {self._peso};\n'
+            f'e é do sexo: {self._sexo}.')
+    def set_bem_estar(self):
         if self.saude:
             print(f'O gato está bem e saudável')
         else:
             print(f'O gato está doente e precisar ir ao veterinário!')
-    def miar(self):
+    def set_miar(self):
         if not self.saude or self.fome:
             print(f'O gato está miando!')
         else:
             print(f'Não tem nada de errado com o gato, ele não está miando!')
 
-    def dormir(self):
+    def set_dormir(self):
         if not self.fome:
             self.dormindo = True
             print(f'O gato está dormindo!')
@@ -49,7 +66,7 @@ class Gato(Animal):
         else:
             print(f'O gato não está dormindo, pois está com fome!')
 
-    def acordar(self):
+    def set_acordar(self):
         if self.dormindo:
             print(f'O gato acordou pois está com fome!')
             self.dormindo = False
@@ -57,12 +74,12 @@ class Gato(Animal):
         else:
             print(f'O gato já está acordado!')
 
-    def brincar(self):
+    def set_brincar(self):
         if not self.fome and not self.dormindo and self.saude:
             print(f'O gato está brincando com seu novelo de lã!')
         else:
             print(f'O gato não está brincando, porque pode estar com fome, dormindo ou doente!')
-    def comer(self):
+    def set_comer(self):
         if self.fome:
             print(f'O gato está comendo')
             self.fome = False
